@@ -48,10 +48,6 @@ export default function TransactionTable({
           <h1 className="text-2xl font-semibold tracking-tight text-gray-900">
             Transaction History
           </h1>
-          <p className="text-sm text-gray-500">
-            {transactions.length} transaction
-            {transactions.length !== 1 ? "s" : ""} recorded
-          </p>
         </div>
 
         <Button
