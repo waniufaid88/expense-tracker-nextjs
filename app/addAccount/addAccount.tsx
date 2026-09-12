@@ -12,10 +12,26 @@ import { FieldGroup, Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export default function AddAccount() {
+type AddTransactionProps = {
+  isOpen: boolean;
+  onClose: () => void;
+};
+
+export default function AddAccount({ isOpen, onClose }: AddTransactionProps) {
+  function handleClose() {
+    onClose();
+  }
+
   return (
     <div className="flex flex-row justify-center items-center bg">
-      <Dialog>
+      <Dialog
+        open={isOpen}
+        onOpenChange={(open) => {
+          if (!open) {
+            handleClose();
+          }
+        }}
+      >
         <form>
           <DialogTrigger
             render={<Button variant="outline">Open Dialog</Button>}
