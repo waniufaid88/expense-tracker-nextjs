@@ -2,13 +2,17 @@ export type Category = {
   id: string;
   name: string;
   description: string | null;
+  created_at: Date;
+  updated_at: Date;
 };
 
-export type Account = {
+export interface Account {
   id: string;
   name: string;
-  opening_balance: string;
-};
+  opening_balance: number;
+  created_at: Date;
+  updated_at: Date;
+}
 
 export type Transaction = {
   id: string;

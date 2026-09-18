@@ -1,5 +1,6 @@
 import db from "@/db";
 import { Categories } from "@/db/schema";
+import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -18,6 +19,18 @@ export async function POST(request: Request) {
       return NextResponse.json(
         { message: "Name is required" },
         { status: 400 },
+      );
+    }
+
+    const existingCategory = await db
+      .select()
+      .from(Categories)
+      .where(eq(Categories.name, name));
+
+    if (existingCategory.length > 0) {
+      return NextResponse.json(
+        { error: "Category with this name already exists" },
+        { status: 409 },
       );
     }
 

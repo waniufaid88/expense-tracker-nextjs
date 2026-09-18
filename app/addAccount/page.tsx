@@ -1,5 +1,11 @@
-import AddAccount from "./addAccount";
+"use client";
+
+import AddAccount from "../accounts/accountFormDialog";
 
 export default function Page() {
-  return <AddAccount />;
+  return (
+    <div>
+      <AddAccount />
+    </div>
+  );
 }

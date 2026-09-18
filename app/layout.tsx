@@ -4,6 +4,7 @@ import "./globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import Header from "@/components/Header";
 import { AppSidebar } from "@/components/app-sidebar";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             {children}
           </main>
         </SidebarProvider>
+        <Toaster />
       </body>
     </html>
   );
