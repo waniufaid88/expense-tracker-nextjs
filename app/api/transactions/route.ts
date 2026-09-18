@@ -3,8 +3,15 @@ import { Accounts, Categories, Transactions } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+
+    const page = Number(searchParams.get("page")) || 1;
+    const limit = Number(searchParams.get("limit")) || 5;
+
+    const offset = (page - 1) * limit;
+
     const data = await db
       .select({
         id: Transactions.id,
@@ -17,7 +24,9 @@ export async function GET() {
       })
       .from(Transactions)
       .innerJoin(Accounts, eq(Transactions.account_id, Accounts.id))
-      .innerJoin(Categories, eq(Transactions.category_id, Categories.id));
+      .innerJoin(Categories, eq(Transactions.category_id, Categories.id))
+      .limit(limit)
+      .offset(offset);
 
     return NextResponse.json(data, {
       status: 200,
@@ -28,7 +37,6 @@ export async function GET() {
     return NextResponse.json(
       {
         message: "Failed to fetch transactions",
-        error: error instanceof Error ? error.message : "Unknown error",
       },
       {
         status: 500,

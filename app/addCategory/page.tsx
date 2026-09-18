@@ -1,5 +1,10 @@
-import AddCategory from "./aaddCategory";
+import AddCategory from "../categories/categoryFormDialog";
 
 export default function Page() {
-  return <AddCategory />;
+  return (
+    <div>
+      {/* <AddCategory isOpen={true} onClose={() => {}} />; */}
+      <AddCategory />
+    </div>
+  );
 }
